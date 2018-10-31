@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="text/javascript" src="overlay.js"> </script>
+</head>
+
+
+<style>
+#container{
+	max-width: 1000px;
+	margin: 0 auto;
+	align-content: cemter;
+}
+
+.item{
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.item div{
+	flex-basis: 15%;
+	flex-grow:1;
+}
+.item .cart-controls{
+	flex-basis: 100%;
+}
+.item div:first-child{
+	flex-basis: 10%;
+	flex-grow:0;
+}
+
+.item .item-desc div:first-child{
+	flex-basis: 50%;
+}
+
+.item-desc{
+	padding-left: 10px;
+	flex-wrap: wrap;
+}
+
+.item p{
+	margin: 0px;
+}
+
+#overlay{
+	width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.overlay-backdrop{
+	background-color: black;
+    opacity: 0.1;
+	position: absolute;
+	top: 0px;
+    left: 0px;
+	width: 100%;
+    height: 100%;
+}
+
+.overlay-content{
+	background-color: white;
+	position:absolute;
+	padding: 10px;
+}
+
+.cart-labels{
+	display: flex;
+	padding-bottom: 6px;
+    margin-bottom: 10px;
+}
+
+.cart-labels div{
+	flex-basis: 15%;
+}
+
+.cart-labels div:first-child{
+	flex-basis: 55%;
+}
+
+.cart-items{
+	border-top: 5px solid #b9b7b7;
+	border-bottom: 5px solid #b9b7b7;
+	padding: 5% 0px;
+}
+
+.item-desc-label{
+	display: none;
+}
+
+ul {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 0px;
+}
+
+ul li{
+	border-right: 2px solid grey;
+	text-align: center;
+	padding: 0px 10px;
+}
+
+ul li:last-child{
+	border-right: 0px;
+}
+
+.cart-controls-desk{
+	display: block;
+}
+
+.text-uppercase{
+	text-transform: uppercase;
+}
+
+.cart-details{
+	display: flex;
+}
+
+.cart-controls{
+	flex-basis: 100%;
+}
+
+@media only screen and (max-width: 600px) {
+	
+	.item-desc{
+		flex-wrap: wrap;
+	}
+	
+	.item-desc div{
+		flex-basis: 100%;
+	}
+	
+	.item div:first-child{
+		flex-basis: 40%;
+	}
+	
+	.item .item-desc div:first-child{
+		flex-basis: 100%;
+	}
+	
+	.cart-labels{
+		display: none;
+	}
+	
+	.item-desc-label{
+		display: inline;
+		padding-right: 10px;
+	}
+	
+	.item div:last-child {
+		//flex-basis: 100%;
+	}
+	
+	.cart-controls-desk{
+		//display: none;
+	}
+	
+	.cart-controls{
+		display: block;
+		flex-basis: 100%;
+		position: absolute;
+		width: 100%;
+		left: 0px;
+		bottom: -25px;
+	}
+	.item {
+		
+		position: relative;
+		padding: 30px;
+	}
+	
+	ul{
+		justify-content: center;
+	}
+	
+	
+}
+
+</style>
+
+<body>
+<div id="container">
+	<h1>YOUR SHOPPING BAG</h1>
+	
+	<div class="cart-labels">
+		<div>3 items</div>
+		<div>Size</div>
+		<div>Qty</div>
+		<div>Price</div>
+	</div>
+	<div class="cart-items">
+	<div class="item">
+	<div style="width:100px"><img src="item1.jpeg" style="width: 100%;"></div>
+	<div>
+		<div class="item-desc" style="display:flex;">
+		<div>
+			<strong>SOLID GREEN COTTTON TSHIRT</strong>
+			<p>Style: #sgfgdfgd</p>
+			<p>Color: Blue</p>
+			<!--<div class="cart-controls-desk">
+			<ul>
+				<li>Edit</li><li>Remove</li><li>Save For Later</li>
+			</ul>
+			</div>-->
+		</div>
+		<div><span class="item-desc-label">Size</span>3</div>
+		<div><span class="item-desc-label">Qty</span><input type="number" min="1" max="20" value="1" style="width:30px;"></div>
+		<div>$20</div>		
+
+		</div>
+				<div class="cart-controls">
+		<ul>
+			<li>Edit</li><li>Remove</li><li>Save For Later</li>
+		</ul>
+		</div>
+	</div>
+	
+	</div>
+	
+	<div class="item">
+	<div style="width:100px"><img src="item1.jpeg" style="width: 100%;"></div>
+	<div class="item-desc" style="display:flex;">
+		<div>
+			<strong>SOLID GREEN COTTTON TSHIRT COTTTON TSHIRT COTTTON TSHIRT</strong>
+			<p>Style: #sgfgdfgd</p>
+			<p>Color: Blue</p>
+		</div>
+		<div>3</div>
+		<div><input type="number" min="1" max="20" value="1" style="width:30px;"></div>
+		<div>$20</div>
+		</div>
+	</div>
+</div>
+
+<div class="cart-details">
+	<div>
+		<h4>Need help
+		or have question?</h4>
+		<p>Call Customer Care Service at
+		1-800-555-5555</p>
+		<p>Chat with one of our stttylists.</p>
+		<p>See return & exchange policy</p>
+	</div>
+	<div>
+		<p>
+			enter promotion code or gift card
+			<input type="text">
+			<button>APPLY</button>
+		</p>
+		
+		<p>Subtotal</p>
+		<p>Promotion code jf10 applied</p>
+		<p>estimated shipping*<br/>You qualify for free shipping because your order is over $50*</p>
+		
+		<p>Estimated Total<br/><span>Tax will be applied during checkout</span></p>
+		
+		<p class="text-uppercase">continue shopping <button class="text-uppercase">Checkout</button></p>
+	
+	</div>
+</div>
+
+</div>
+
+<div id="overlay" style="display:none;">
+	<div class="overlay-backdrop"></div>
+	<div class="overlay-content">
+	<div style="text-align: right;"><span>X</span></div>
+	<div class="item">
+	<div style="width:100px"><img src="item1.jpeg" style="width: 100%;"></div>
+	<div class="item-desc" style="display:flex;">
+		<div>
+			<strong>SOLID GREEN COTTTON TSHIRT</strong>
+			<p>Style: #sgfgdfgd</p>
+			<p>Color: Blue</p>
+		</div>
+		<div>3</div>
+		<div><input type="number" min="1" max="20" value="1" style="width:30px;"></div>
+		<div>$20</div>
+		<div>Edit | Remove | Save For Later</div>
+		
+		</div>
+		
+			
+		
+		
+	</div><div class="item">
+	<div style="width:100px"><img src="item1.jpeg" style="width: 100%;"></div>
+	<div class="item-desc" style="display:flex;">
+		<div>
+			<strong>SOLID GREEN COTTTON TSHIRT</strong>
+			<p>Style: #sgfgdfgd</p>
+			<p>Color: Blue</p>
+		</div>
+		<div>3</div>
+		<div><input type="number" min="1" max="20" value="1" style="width:30px;"></div>
+		<div>$20</div>
+		<div>Edit | Remove | Save For Later</div>
+		
+		</div>
+		
+			
+		
+		
+	</div>
+	
+	
+	
+	</div>
+</div>
+<script>
+
+var overl = overlay('123');
+console.log(overlay);
+overl.show();
+overl.hide();
+
+var overl = overlay('456');
+console.log(overl);
+overl.show();
+overl.hide();
+
+</script>
+</body>
+
+
+</html>
