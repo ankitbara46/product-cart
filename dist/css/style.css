@@ -102,13 +102,13 @@ ul {
   padding: 0px;
 }
 
-ul li{
+.cart-controls ul li{
 	border-right: 2px solid grey;
 	text-align: center;
 	padding: 0px 10px;
 }
 
-ul li:last-child{
+.cart-controls ul li:last-child{
 	border-right: 0px;
 }
 

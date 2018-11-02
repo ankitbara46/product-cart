@@ -1,10 +1,18 @@
-import axios from 'axios';
+import Cart from './models/Cart';
+import * as cartView from './views/cartView';
 
-async function getCartData(){
+document.addEventListener('DOMContentLoaded', function(){
+	console.log(11);
+	setCart();
+});
 
-	var res = await axios('http://localhost:5001/cart-8c825/us-central1/app/cart.json');
 
-	console.log(res.data.item_count);
+async function setCart(){
+	const cart = new Cart();
+	await cart.getCartData();
+	
+	cartView.renderResults(cart.result.items);
+	
+	console.log(cart.result);
+	
 }
-
-getCartData();
