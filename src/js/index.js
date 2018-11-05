@@ -21,7 +21,6 @@ document.addEventListener('DOMContentLoaded', function(){
 
 	document.querySelector(".overlay-content").addEventListener("click",function(e) {
 	   	if(e.target.className =='add-tobag-btn'){
-	   		console.log(123);
 	   		const form = document.querySelector('form[name="updatecart"]');
 	   		const qty = form.querySelector('select[name="qty"]').value;
 	   		const size = form.querySelector('select[name="size"]').value;
@@ -35,10 +34,7 @@ document.addEventListener('DOMContentLoaded', function(){
 });
 
 async function setOverlay(id){
-	
 	document.querySelector('.overlay-content').innerHTML = `<img src="img/loader.gif" style="width: 100%;">`;
-	
-
 	let cartData = JSON.parse(localStorage.getItem("cartData"));
 	let product;
 
@@ -46,7 +42,7 @@ async function setOverlay(id){
    		if(item.id == id){
    			product = item;	
    		} 
-   	})
+   	});
 	const cart = new Cart();
 	await cart.getProductDetails(product.product_id);
 	cartView.editOverlay(product, cart.productDetails);
@@ -57,11 +53,7 @@ async function setOverlay(id){
 async function setCart(){
 	const cart = new Cart();
 	await cart.getCartData();
-	
-	cartView.renderResults(cart.result.items);
-	
-	console.log(cart.result);
-	
+	cartView.renderResults(cart.result);
 }
 
 async function updateCart(id, size, color, quantity){

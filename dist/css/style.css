@@ -1,7 +1,12 @@
-body{
+body, a{
 	max-width: 1000px;
 	margin: 0 auto;
 	align-content: cemter;
+	color: #878787;
+}
+
+h1, strong, .price{
+	color: #483d3d;
 }
 
 .item article{
@@ -24,6 +29,7 @@ body{
 
 .item .cart-controls{
 	flex-basis: 100%;
+	margin-top: 20px;
 }
 .item div:first-child{
 	flex-basis: 10%;
@@ -69,7 +75,15 @@ body{
 	position:absolute;
 	padding: 10px;
 	max-width: 85%;
+	width: 900px;
 }
+
+.overlay-content .item-img{
+	max-width: 400px;
+	width: 100%;
+}
+
+
 
 .cart-labels{
 	display: flex;
@@ -115,12 +129,15 @@ body{
 	text-transform: uppercase;
 }
 
-ul {
+ul{
+  list-style: none;
+  padding: 0px;
+}
+
+.cart-controls ul {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  list-style: none;
-  padding: 0px;
 }
 
 .cart-controls ul li{
@@ -157,6 +174,7 @@ ul {
     border-color: #2e6da4;
     padding: 10px;
     border: none;
+	width: 100px;
 }
 
 .checkout{
@@ -193,6 +211,79 @@ ul {
 
 .color-container input:checked ~ .product-color {
   border: 2px solid black;
+}
+
+.color-secondary{
+	color: #483d3d;
+}
+
+.item-price{
+	text-decoration:line-through;
+	display: block;
+}
+
+.item-currency{
+	font-size: 0.8em;
+	vertical-align: top;
+}
+.size-small{
+	font-size: 0.8em;
+}
+
+.skip-link{
+	left: -100%;
+	position: absolute;
+}
+
+.skip-link:focus{
+	left: 50%;
+}
+
+#main{
+	outline:0;
+}
+
+.item-price-overlay{
+	font-size: 36px;
+}
+
+.item-currency-overlay{
+	vertical-align: top;
+}
+
+.item-details-wrapper-overlay{
+	min-width: 35%;
+	text-align: center;
+	display: flex;
+	
+}
+
+.item-details-overlay{
+	margin: auto;
+	border-top: 5px solid #b9b7b7;
+}
+
+.apply{
+	background-color: #fff;
+    border-color: #b9b7b7;
+    padding: 5px;
+}
+
+.promotion-code input{
+	height: 20px;
+}
+
+.margin-top-bottom-20{
+	margin: 20px 0px;
+}
+
+.equally-space{
+	display: flex;
+	justify-content: space-between;
+}
+
+.price{
+	font-weight: 600;
 }
 
 @media only screen and (max-width: 600px) {
@@ -239,10 +330,6 @@ ul {
 		bottom: 0px;
 	}
 
-	.cart-items .item{
-		padding-bottom: 15%;
-	}
-
 	.item {
 		
 		position: relative;
@@ -257,5 +344,16 @@ ul {
 		display: none;
 	}
 	
+	main h1, .cart-items .item, .cart-total{
+		padding: 2%;
+	}
+	
+	.item-price{
+		display: inline;
+	}
+	
+	.cart-items .item{
+		padding-bottom: 15%;
+	}
 	
 }

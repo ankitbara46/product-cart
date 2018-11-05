@@ -1,19 +1,26 @@
 
-const renderCartProduct = product => {
+const renderCartProduct = (product, index, pd) => {
 	const markup = 	`
 		<li class="item">
 		<article>
-			<div style="width:100px"><img src="${product.image}" style="width: 100%;"></div>
+			<div style="width:100px"><img src="${product.image}" style="width: 100%;" alt="${product.title}"></div>
 			<div>
 				<div class="item-desc" style="display:flex;">
 				<div>
-					<strong>${product.name}</strong>
-					<p>Style: ${product.style}</p>
-					<p>Color: ${product.color}</p>
+				<ul>
+					<li><strong>${product.name}</strong></li>
+					<li class="size-small">Style: ${product.style}</li>
+					<li class="size-small">Color: ${product.color}</li>
+				</ul>
 				</div>
-				<div><span class="item-desc-label">Size</span>${product.size}</div>
-				<div><span class="item-desc-label">Qty</span><input type="number" min="1" max="20" value="${product.qty}" style="width:30px;"></div>
-				<div>${product.price}</div>
+				<div aria-label="size ${product.size}"><span class="item-desc-label">Size:</span><span class="color-secondary">${product.size}</span></div>
+				<div><span class="item-desc-label">Qty</span><input type="number" min="1" max="20" value="${product.qty}" style="width:30px;" aria-label="Quantity ${product.qty}"></div>
+				<div>
+					${
+						 product.selling_price < product.price ? `<span class="item-price" aria-label="Price ${product.price}"><span class="item-currency">$</span><span>${product.price*product.qty	}</span></span>`:''
+					 }
+					<span aria-label="Price ${product.selling_price*product.qty}"><span class="item-currency">$</span><span class="price">${product.selling_price*product.qty}</span></span>
+				</div>
 				</div>
 				<div class="cart-controls">
 				<ul>
@@ -28,27 +35,37 @@ const renderCartProduct = product => {
 	const itemsDom = document.querySelector('.cart-items');
 	
 	itemsDom.insertAdjacentHTML('beforeend', markup);
-
+	
 }
 
 
-export const renderResults = cartProducts => {
+
+
+export const renderResults = cartDetails => {
 	document.querySelector('.cart-items').innerHTML = '';
+	let cartProducts = cartDetails.items;
 	localStorage.setItem("cartData", JSON.stringify(cartProducts));
 	cartProducts.forEach(renderCartProduct);
+	
+	document.querySelector('.sub-total').textContent = cartDetails.subtotal;
+	document.querySelector('.promotion').textContent = cartDetails.discount;
+	document.querySelector('.total-price').textContent = cartDetails.total;
+	document.querySelector('.item-count').textContent = cartProducts.length;
+	
 }
 
 
 export const editOverlay = (product, productDetails) => {
 	//console.log(product);
 	const markup = `
-		<div>
+		<div class="item-details-wrapper-overlay">
+			<div class="item-details-overlay">
 			<form name="updatecart" onsubmit="return false">
-			<p> ${productDetails.name}</p>
-			<p>${productDetails.price}</p>
+			<h3 class="title-overlay"> ${productDetails.name}</h3>
+			<p><span class="item-currency-overlay ">$</span><span class="item-price-overlay color-secondary">${productDetails.price}</span></p>
 			<p>
 			${
-				productDetails.color.map( sz => `<label class="color-container"><input type="radio" name="color" value="${sz}" ${sz==product.color ? `checked`:``}><span class="product-color" style="background-color:${sz}"></span></label>`)
+				productDetails.color.map( color => `<label class="color-container"><input type="radio" name="color" value="${color}" ${color==product.color ? `checked`:``}><span class="product-color" style="background-color:${color}"></span></label>`).join('')
 			}
 			</p>
 			<p>
@@ -57,7 +74,7 @@ export const editOverlay = (product, productDetails) => {
 				<select name="size">
 					<option value="">SIZE</option>
 					${
-						productDetails.size.map( sz => `<option value="${sz}" ${sz==product.size ? `selected`:``}>${sz}</option>`)
+						productDetails.size.map( size => `<option value="${size}" ${size==product.size ? `selected`:``}>${size}</option>`).join('')
 					}
 				</select></span> 
 
@@ -66,15 +83,17 @@ export const editOverlay = (product, productDetails) => {
 					<select name='qty'>
 					<option value="">QTY</option>
 					${
-						Array(parseInt(productDetails.qty)).join(0).split(0).map( (sz, i) => `<option value="${i+1}" ${i+1==product.qty ? `selected`:``}>${i+1}</option>`)
+						Array(parseInt(productDetails.qty)).join(0).split(0).map( (sz, i) => `<option value="${i+1}" ${i+1==product.qty ? `selected`:``}>${i+1}</option>`).join('')
 					}
 				</select></span>
 				</p>
-			<BUTTON class="add-tobag-btn">Add To Bag</BUTTON>
+			<BUTTON class="add-tobag-btn">Edit</BUTTON>
+			<div><a href="#">See product details</a></div>
 			</form>
+			</div>
 		</div>
 		<div>
-			<img src="https://cart-8c825.firebaseapp.com/img/item1.jpeg" style="width: 100%; max-width: 200px;">
+			<img src="${productDetails.image}" class="item-img">
 		</div>
 		`;
 		document.querySelector('.overlay-content').innerHTML = markup;
