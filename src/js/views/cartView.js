@@ -50,7 +50,9 @@ export const renderResults = cartDetails => {
 	document.querySelector('.sub-total').textContent = cartDetails.subtotal;
 	document.querySelector('.promotion').textContent = cartDetails.discount;
 	document.querySelector('.total-price').textContent = cartDetails.total;
-	document.querySelector('.item-count').textContent = cartProducts.length;
+	const item_count = document.querySelectorAll('.item-count');
+	item_count[0].textContent = cartProducts.length;
+	item_count[1].textContent = cartProducts.length;
 	
 }
 
