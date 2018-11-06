@@ -119,4 +119,4 @@ app.get('/productDetails.json', (request, response) => {
 // // https://firebase.google.com/docs/functions/write-firebase-functions
 //
  //exports.app = functions.https.onRequest(app);
- app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+ app.listen(port, () => console.log(`Running node server on port ${port}!`))

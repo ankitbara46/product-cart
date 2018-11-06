@@ -6,7 +6,7 @@ Please follow below steps to run application
 
 	a. Go to the folder api.
 	b. open command prompt run command npm install.
-	c. open command prompt run command npm index.js.
+	c. open command prompt run command node index.js.
 	
 3. Steps to run application
 
