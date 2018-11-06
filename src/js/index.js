@@ -15,6 +15,10 @@ document.addEventListener('DOMContentLoaded', function(){
 	    }
 	});
 
+	document.querySelector(".close-btn, .overlay-backdrop").addEventListener("click",function(e) {
+	   	document.getElementById('overlay').style.display = 'none';
+	});
+
 	document.querySelector(".close-btn").addEventListener("click",function(e) {
 	   	document.getElementById('overlay').style.display = 'none';
 	});
@@ -28,8 +32,20 @@ document.addEventListener('DOMContentLoaded', function(){
 	   		const id = form.querySelector('input[name="id"]').value;
 	   		updateCart(id, size, color, qty);	
 	   	}
+
+	   	if(e.target.nodeName == "INPUT"){
+			document.querySelector(".item-img").src = e.target.dataset.img;
+		}
 	   	
 	});
+
+
+	/*document.querySelector(".color-selector").addEventListener("click",function(e) {
+	   	if(e.target.nodeName == "INPUT"){
+			document.querySelector(".item-img").src = e.target.dataset.img;
+		}
+	});*/
+
 	
 });
 
@@ -46,6 +62,7 @@ async function setOverlay(id){
 	const cart = new Cart();
 	await cart.getProductDetails(product.product_id);
 	cartView.editOverlay(product, cart.productDetails);
+	document.querySelector("[name='color']:checked").click();
 }
 
 

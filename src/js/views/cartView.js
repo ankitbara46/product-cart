@@ -3,7 +3,7 @@ const renderCartProduct = (product, index, pd) => {
 	const markup = 	`
 		<li class="item">
 		<article>
-			<div style="width:100px"><img src="${product.image}" style="width: 100%;" alt="${product.title}"></div>
+			<div class="item-thumb-img"><img src="${product.image}" style="width: 100%;" alt="${product.title}"></div>
 			<div>
 				<div class="item-desc" style="display:flex;">
 				<div>
@@ -17,7 +17,7 @@ const renderCartProduct = (product, index, pd) => {
 				<div><span class="item-desc-label">Qty</span><input type="number" min="1" max="20" value="${product.qty}" style="width:30px;" aria-label="Quantity ${product.qty}"></div>
 				<div>
 					${
-						 product.selling_price < product.price ? `<span class="item-price" aria-label="Price ${product.price}"><span class="item-currency">$</span><span>${product.price*product.qty	}</span></span>`:''
+						 product.selling_price < product.price ? `<span class="item-price" aria-label="Price ${product.price}"><span class="item-currency">$</span><span>${product.price*product.qty}</span></span>`:''
 					 }
 					<span aria-label="Price ${product.selling_price*product.qty}"><span class="item-currency">$</span><span class="price">${product.selling_price*product.qty}</span></span>
 				</div>
@@ -63,9 +63,11 @@ export const editOverlay = (product, productDetails) => {
 			<form name="updatecart" onsubmit="return false">
 			<h3 class="title-overlay"> ${productDetails.name}</h3>
 			<p><span class="item-currency-overlay ">$</span><span class="item-price-overlay color-secondary">${productDetails.price}</span></p>
-			<p>
+			
+			<p class="color-selector">
+			<div class="text-uppercase">${productDetails.brand}</div>
 			${
-				productDetails.color.map( color => `<label class="color-container"><input type="radio" name="color" value="${color}" ${color==product.color ? `checked`:``}><span class="product-color" style="background-color:${color}"></span></label>`).join('')
+				productDetails.color.map( color => `<label class="color-container"><input type="radio" name="color" value="${color.name}" ${color.name==product.color ? `checked`:``} data-img="${color.image}"><span class="product-color" style="background-color:${color.colorcode}"></span></label>`).join('')
 			}
 			</p>
 			<p>
@@ -92,8 +94,8 @@ export const editOverlay = (product, productDetails) => {
 			</form>
 			</div>
 		</div>
-		<div>
-			<img src="${productDetails.image}" class="item-img">
+		<div class="item-img-selected">
+			<img class="item-img">
 		</div>
 		`;
 		document.querySelector('.overlay-content').innerHTML = markup;

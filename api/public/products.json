@@ -1,1 +1,64 @@
-{"items":[{"id":"1","name":"SOLID GREEN COTTTON TSHIRT","style":"#sgfgdfgd","color":["blue","red","green"],"size":["S","L"],"qty":"6","price":"240","selling_price":"210","curency":"$","image":"https://cart-8c825.firebaseapp.com/img/item1.jpeg"},{"id":"2","name":"SOLID GREEN COTTTON TSHIRT 2","style":"#sgfgdfgd","color":["Red","green"],"size":["S","M","L"],"qty":"4","price":"240","selling_price":"240","curency":"$","image":"https://cart-8c825.firebaseapp.com/img/item1.jpeg"}]}
+{
+  "items": [
+    {
+      "id": "1",
+      "brand": "EPG",
+      "name": "Men Polo Neck Orange T-Shirt",
+      "style": "#sgfgdfgd",
+      "color": [
+        {
+           "name": "Orange",
+            "image": "http://localhost:3000/img/xl-pct007g-epg-original-imaf7mf9dgzmmarj.jpeg",
+            "colorcode": "orange"
+        },
+        {
+            "name": "Grey", 
+            "image": "http://localhost:3000/img/xxl-pct006g-epg-original-imaf97ufsecbk23z.jpeg",
+            "colorcode": "grey"
+        },
+        {
+        	"name": "Black",
+            "image": "http://localhost:3000/img/l-pct003g-epg-original-imaf97ugzr229v8j.jpeg",
+            "colorcode": "black"
+        }
+      ],
+      "size": [
+        "S",
+        "L"
+      ],
+      "qty": "6",
+      "price": "240",
+      "selling_price": "210",
+      "curency": "$",
+      "image": "http://localhost:3000/img/m-pct004g-epg-original-imaf7myv6mszaznp.jpeg"
+    },
+    {
+      "id": "2",
+      "brand": "Checkered",
+      "name": "Men's Boat Neck T-Shirt",
+      "style": "#sgfgdfgd",
+      "color": [
+        {
+           "name": "Red",
+            "image": "http://localhost:3000/img/xxl-rss17chkhn-r-rodid-original-imaf6wewqytgvrrf.jpeg",
+            "colorcode": "red"
+        },
+        {
+            "name": "Maroon", 
+            "image": "http://localhost:3000/img/xl-rss17chkhn-m-rodid-original-imaexz64mxfh5r6j.jpeg",
+            "colorcode": "maroon"
+        }
+      ],
+      "size": [
+        "S",
+        "M",
+        "L"
+      ],
+      "qty": "4",
+      "price": "240",
+      "selling_price": "240",
+      "curency": "$",
+      "image": "http://localhost:3000/img/xl-rss17chkhn-m-rodid-original-imaexz64mxfh5r6j.jpeg"
+    }
+  ]
+}

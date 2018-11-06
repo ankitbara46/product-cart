@@ -79,11 +79,20 @@ h1, strong, .price{
 }
 
 .overlay-content .item-img{
-	max-width: 400px;
-	width: 100%;
+	max-width: 100%;
+	
+	max-height: 500px;
 }
 
+.item-img-selected{
+	width: 50%;
+	text-align: right;
+}
 
+.item-thumb-img{
+	height: 150px;
+	overflow: hidden;
+}
 
 .cart-labels{
 	display: flex;
@@ -252,6 +261,7 @@ ul{
 }
 
 .item-details-wrapper-overlay{
+	max-width: 50%;
 	min-width: 35%;
 	text-align: center;
 	display: flex;
@@ -284,6 +294,7 @@ ul{
 
 .price{
 	font-weight: 600;
+	text-transform: uppercase;
 }
 
 @media only screen and (max-width: 600px) {
