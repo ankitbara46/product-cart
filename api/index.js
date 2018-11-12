@@ -39,6 +39,15 @@ app.get('/cart.json', (request, response) => {
 			cartData.items[index].image = productsArray[product_id].image;
 			cartData.items[index].selling_price = productsArray[product_id].selling_price;
 			subtotal += productsArray[product_id].selling_price*cartData.items[index].qty;
+			
+			if(typeof(cartData.items[index].color) !== undefined){
+				productsArray[product_id].color.forEach((color)=>{
+					if(color.name == cartData.items[index].color){
+						cartData.items[index].image = color.image;
+					}
+				})
+			}
+			
 		} );
 		cartData.subtotal = subtotal;
 		cartData.discount = 10;

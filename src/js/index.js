@@ -38,15 +38,6 @@ document.addEventListener('DOMContentLoaded', function(){
 		}
 	   	
 	});
-
-
-	/*document.querySelector(".color-selector").addEventListener("click",function(e) {
-	   	if(e.target.nodeName == "INPUT"){
-			document.querySelector(".item-img").src = e.target.dataset.img;
-		}
-	});*/
-
-	
 });
 
 async function setOverlay(id){
