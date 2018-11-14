@@ -15,7 +15,7 @@ app.use(function(req, res, next) {
 
 app.use(express.static('public'));
 
-app.use(bodyParser.json()); // support json encoded bodies
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/cart.json', (request, response) => { 
@@ -38,6 +38,7 @@ app.get('/cart.json', (request, response) => {
 			cartData.items[index].price = productsArray[product_id].price;
 			cartData.items[index].image = productsArray[product_id].image;
 			cartData.items[index].selling_price = productsArray[product_id].selling_price;
+			cartData.items[index].available_qty = productsArray[product_id].qty;
 			subtotal += productsArray[product_id].selling_price*cartData.items[index].qty;
 			
 			if(typeof(cartData.items[index].color) !== undefined){
@@ -90,18 +91,50 @@ app.get('/productDetails.json', (request, response) => {
 		    items.forEach( (item, index) => {
 		    	
 		    	if(request.body.id == item.id){
-		    		if(request.body.quantity){
+		    		if(request.body.quantity && request.body.quantity != ''){
 		    			items[index]['qty'] =  request.body.quantity;	
 		    		}
 
-		    		if(request.body.size){
+		    		if(request.body.size && request.body.size!=''){
 		    			items[index]['size'] =  request.body.size;	
 		    		}
 		    		
-					if(request.body.color){
+					if(request.body.color && request.body.size!=''){
 						items[index]['color'] = request.body.color;	
 					}
 					 		    		
+		    	}
+	
+		    })
+
+		    jsonData.items = items;
+
+		    fs.writeFile('public/cartData.json', JSON.stringify(jsonData), function(err, data) {
+			    if(err) {
+			        response.json({"success": false});
+			    } else {
+			    	response.json({"success": true});
+			    }
+				response.end();
+			});
+
+		  });
+	}
+ 
+ });
+ 
+ app.post('/deleteitem', (request, response) => {
+
+	if (request.method === 'POST') {
+	      
+	      fs.readFile('public/cartData.json', function(err, data) {
+		    let jsonData = JSON.parse(data.toString());
+		    let items = jsonData.items;
+
+		    items.forEach( (item, index) => {
+		    	
+		    	if(request.body.id == item.id){
+		    		items.splice(index,1); 		
 		    	}
 	
 		    })
