@@ -1,8 +1,7 @@
 import axios from 'axios';
 export default class Cart{
 	
-	constructor(query){
-		this.query = query;
+	constructor(){
 	}
 	
 	async getCartData(){
@@ -24,6 +23,19 @@ export default class Cart{
 			    size: size,
 			    color: color,
 			    quantity: quantity
+			});
+
+			this.response = res.data;
+			console.log('daat received',this.response);
+		} catch(error){
+			console.log(error);
+		}
+	}
+	
+	async deleteItem(id){
+		try{
+			var res = await axios.post('http://localhost:3000/deleteitem', {
+			    id: id
 			});
 
 			this.response = res.data;

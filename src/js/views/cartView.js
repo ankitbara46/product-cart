@@ -1,12 +1,12 @@
 
-const renderCartProduct = (product, index, pd) => {
+const renderCartProduct = (product, index) => {
 	const markup = 	`
 		<li class="item">
 		<article>
 			<div class="item-thumb-img"><img src="${product.image}" style="width: 100%;" alt="${product.title}"></div>
 			<div>
 				<div class="item-desc" style="display:flex;">
-				<div>
+				<div class="item-desc-detail">
 				<ul>
 					<li><strong>${product.name}</strong></li>
 					<li class="size-small">Style: ${product.style}</li>
@@ -14,7 +14,8 @@ const renderCartProduct = (product, index, pd) => {
 				</ul>
 				</div>
 				<div aria-label="size ${product.size}"><span class="item-desc-label">Size:</span><span class="color-secondary">${product.size}</span></div>
-				<div><span class="item-desc-label">Qty</span><input type="number" min="1" max="20" value="${product.qty}" style="width:30px;" aria-label="Quantity ${product.qty}"></div>
+				<div><span class="item-desc-label">Qty</span>
+					<span class="item-qty">${product.qty}</span></div>
 				<div>
 					${
 						 product.selling_price < product.price ? `<span class="item-price" aria-label="Price ${product.price}"><span class="item-currency">$</span><span>${product.price*product.qty}</span></span>`:''
@@ -24,7 +25,7 @@ const renderCartProduct = (product, index, pd) => {
 				</div>
 				<div class="cart-controls">
 				<ul>
-					<li class="edit" id="${product.id}">Edit</li><li class="remove">Remove</li><li class="saveFL">Save For Later</li>
+					<li class="edit"><a href="#" data-id="${product.id}">EDIT</a></li><li class="remove"><a href="#" data-id="${product.id}">X REMOVE</a></li><li class="saveFL"><a href="#">SAVE FOR LATER</a></li>
 				</ul>
 				</div>
 			</div>
@@ -92,7 +93,7 @@ export const editOverlay = (product, productDetails) => {
 				</select></span>
 				</p>
 			<BUTTON class="add-tobag-btn">Edit</BUTTON>
-			<div><a href="#">See product details</a></div>
+			<div class="product-details"><a href="#">See product details</a></div>
 			</form>
 			</div>
 		</div>

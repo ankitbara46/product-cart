@@ -2,17 +2,26 @@ import Cart from './models/Cart';
 import * as cartView from './views/cartView';
 
 document.addEventListener('DOMContentLoaded', function(){
-	setCart();
-	//updateCart();
-
+	const cart = new Cart();
+	setCart(cart);
+	
 	document.querySelector(".cart-items").addEventListener("click",function(e) {
-	    // e.target is our targetted element.
-	    // try doing console.log(e.target.nodeName), it will result LI
-	    if(e.target && e.target.nodeName == "LI" && e.target.className =='edit') {
+	    
+		if(e.target && e.target.nodeName == "A" && e.target.parentNode.className =='edit') {
 	    	document.getElementById('overlay').style.display = 'flex';
-		   	setOverlay(e.target.id);
-
+		   	setOverlay(cart, e.target.dataset.id);
 	    }
+		
+		if(e.target && e.target.nodeName == "A" && e.target.parentNode.className =='remove') {
+			const itemId = e.target.dataset.id;
+	    	var r = confirm("Are you sure you want to remove this item ?");
+			if (r == true) {
+				deleteItem(cart, itemId);
+			}
+			
+	    }
+		
+		
 	});
 
 	document.querySelector(".close-btn, .overlay-backdrop").addEventListener("click",function(e) {
@@ -30,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	   		const size = form.querySelector('select[name="size"]').value;
 	   		const color = form.querySelector('input[name="color"]:checked').value;
 	   		const id = form.querySelector('input[name="id"]').value;
-	   		updateCart(id, size, color, qty);	
+	   		updateCart(cart, id, size, color, qty);	
 	   	}
 
 	   	if(e.target.nodeName == "INPUT"){
@@ -38,9 +47,14 @@ document.addEventListener('DOMContentLoaded', function(){
 		}
 	   	
 	});
+	
+	document.addEventListener('keyup', function(e) {
+	  if (e.keyCode == 27) { document.getElementById('overlay').style.display = 'none'; }  
+	
+	});
 });
 
-async function setOverlay(id){
+async function setOverlay(cart, id){
 	document.querySelector('.overlay-content').innerHTML = `<img src="img/loader.gif" style="width: 100%;">`;
 	let cartData = JSON.parse(localStorage.getItem("cartData"));
 	let product;
@@ -50,7 +64,6 @@ async function setOverlay(id){
    			product = item;	
    		} 
    	});
-	const cart = new Cart();
 	await cart.getProductDetails(product.product_id);
 	cartView.editOverlay(product, cart.productDetails);
 	document.querySelector("[name='color']:checked").click();
@@ -58,17 +71,22 @@ async function setOverlay(id){
 
 
 
-async function setCart(){
-	const cart = new Cart();
+async function setCart(cart){
 	await cart.getCartData();
 	cartView.renderResults(cart.result);
 }
 
-async function updateCart(id, size, color, quantity){
-	const cart = new Cart();
+async function updateCart(cart, id, size, color, quantity){
 	await cart.updateCartData(id, size, color, quantity);
 	if(cart.response.success == true){
 		document.getElementById('overlay').style.display = 'none';
-		setCart();
+		setCart(cart);
+	}
+}
+
+async function deleteItem(cart, id){
+	await cart.deleteItem(id);
+	if(cart.response.success == true){
+		setCart(cart);
 	}
 }

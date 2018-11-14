@@ -2,6 +2,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+	font-size: 16px;
 }
 
 body, a{
@@ -9,6 +10,7 @@ body, a{
 	margin: 0 auto;
 	align-content: cemter;
 	color: #878787;
+	text-decoration: none;
 }
 
 h1, strong, .price{
@@ -35,14 +37,14 @@ h1, strong, .price{
 
 .item .cart-controls{
 	flex-basis: 100%;
-	margin-top: 20px;
+	margin-top: 4.5em;
 }
-.item div:first-child{
+.item .item-thumb-img{
 	flex-basis: 10%;
 	flex-grow:0;
 }
 
-.item .item-desc div:first-child{
+.item .item-desc .item-desc-detail{
 	flex-basis: 50%;
 }
 
@@ -121,7 +123,7 @@ h1, strong, .price{
 	flex-basis: 15%;
 }
 
-.cart-labels div:first-child{
+.cart-labels .item-count-container{
 	flex-basis: 55%;
 }
 
@@ -332,6 +334,21 @@ ul{
     margin-top: 7%;
 }
 
+.item-qty{
+	border: 1px solid;
+	width: 30px;
+	display: inline-block;
+	text-align: center;
+}
+
+.checkout a, .product-details a{
+	text-underline-position: under;
+    text-decoration: underline;
+}
+
+.color-container .product-color:hover{
+	cursor: pointer;
+}
 
 
 @media only screen and (max-width: 600px) {
@@ -344,11 +361,11 @@ ul{
 		flex-basis: 100%;
 	}
 	
-	.item div:first-child{
+	.item .item-thumb-img{
 		flex-basis: 40%;
 	}
 	
-	.item .item-desc div:first-child{
+	.item .item-desc .item-desc-detail{
 		flex-basis: 100%;
 	}
 	
@@ -385,7 +402,7 @@ ul{
 	}
 
 	.cart-head h1{
-		font-size: 24px;
+		font-size: 20px;
 	}
 	
 	ul{
